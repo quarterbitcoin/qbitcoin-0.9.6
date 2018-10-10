@@ -1,0 +1,5 @@
+Building Qbitcoin
+
+See doc/build-*.md for instructions on building qbitcoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of Qbitcoin.

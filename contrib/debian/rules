@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+
+#DEB_MAKE_CHECK_TARGET = test_qbitcoin
+#build/qbitcoind::
+#	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),,src/test_qbitcoin)
+
+DEB_INSTALL_EXAMPLES_qbitcoind += debian/examples/*
+DEB_INSTALL_MANPAGES_qbitcoind += debian/manpages/*
+
+%:
+	dh --with bash-completion $@
+
+override_dh_auto_build:
+	cd src; $(MAKE) -f makefile.unix qbitcoind
+	$(MAKE)
+
+override_dh_auto_clean:
+	if [ -f Makefile ]; then $(MAKE) clean; else rm -rf build/; rm -f qbitcoin-qt; fi
+	cd src; $(MAKE) -f makefile.unix clean
+
+override_dh_auto_configure:
+	qmake qbitcoin-qt.pro USE_QRCODE=1
+
+override_dh_auto_test:
+	cd src; $(MAKE) -f makefile.unix test_qbitcoin
+	src/test_qbitcoin
+
+# Ensure wrapper is set executable
+binary-post-install/qbitcoind:
+	chmod +x $(cdbs_curdestdir)usr/bin/qbitcoind
+binary-post-install/qbitcoin-qt:
+	chmod +x $(cdbs_curdestdir)usr/bin/qbitcoin-qt

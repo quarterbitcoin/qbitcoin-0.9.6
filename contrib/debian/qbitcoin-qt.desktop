@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Qbitcoin
+Comment=Qbitcoin P2P Cryptocurrency
+Comment[fr]=Qbitcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Qbitcoin, eşten eşe kriptografik sanal para birimi
+Exec=qbitcoin-qt %u
+Terminal=false
+Type=Application
+Icon=qbitcoin128
+MimeType=x-scheme-handler/qbitcoin;
+Categories=Office;Finance;
